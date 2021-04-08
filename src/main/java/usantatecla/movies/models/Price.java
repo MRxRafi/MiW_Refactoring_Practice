@@ -10,9 +10,9 @@ public abstract class Price {
 	protected static final int DAYS_RENTED_THRESHOLD_NEW_RELEASE = 1;
 	protected static final int FREQUENT_RENTER_POINTS_NEW_RELEASE = 2;
 
-	private static final double CHARGE_CHILDREN = 1.5;
-	private static final double EXTRA_CHARGE_CHILDREN = 1.5;
-	private static final int DAYS_RENTED_THRESHOLD_CHILDREN = 3;
+	protected static final double CHARGE_CHILDREN = 1.5;
+	protected static final double EXTRA_CHARGE_CHILDREN = 1.5;
+	protected static final int DAYS_RENTED_THRESHOLD_CHILDREN = 3;
 
 	private static final int FREQUENT_RENTER_POINTS = 1;
 	

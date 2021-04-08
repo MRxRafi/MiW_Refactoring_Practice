@@ -3,19 +3,20 @@ package usantatecla.movies.models;
 public class Movie {
 
 	private String title;
-	
 	private Price price;
+	private MovieType movieType;
 	
-	public Movie(String title, Price price) {
+	public Movie(String title, Price price, MovieType movieType) {
 		this.title = title;
 		this.price = price;
+		this.movieType = movieType;
 	}
 	
 	public double getCharge(int daysRented) {
-		if(this.price instanceof RegularPrice) {
+		if(this.movieType == MovieType.REGULAR) {
 			return price.getChargeRegular(daysRented);
 		}
-		else if(this.price instanceof NewReleasePrice) {
+		else if(this.movieType == MovieType.NEW_RELEASE) {
 			return price.getChargeNewReleases(daysRented);
 		}
 		else {
@@ -24,7 +25,7 @@ public class Movie {
 	}
 	
 	public int getFrequentRenterPoints(int daysRented) {
-		if(this.price instanceof NewReleasePrice) {
+		if(this.movieType == MovieType.NEW_RELEASE) {
 			return price.getFrequentRenterPointsNewReleases(daysRented);
 		}
 		else {

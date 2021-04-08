@@ -3,8 +3,7 @@ package usantatecla.movies.models;
 public class MovieBuilder {
 
 	private String title;
-	
-	private Price price;
+	private MovieType movieType;
 	
 	public MovieBuilder() {
 		title = "movieName";
@@ -16,21 +15,21 @@ public class MovieBuilder {
 	}
 	
 	public MovieBuilder childrens() {
-		this.price = new ChildrenPrice();
+		this.movieType = MovieType.CHILDREN;
 		return this;
 	}
 	
 	public MovieBuilder regular() {
-		this.price = new RegularPrice();
+		this.movieType = MovieType.REGULAR;
 		return this;
 	}
 	
 	public MovieBuilder newRelease() {
-		this.price = new NewReleasePrice();
+		this.movieType = MovieType.NEW_RELEASE;
 		return this;
 	}
 	
 	public Movie build() {
-		return new Movie(title, price);
+		return new Movie(this.title, new Price(), this.movieType);
 	}
 }

@@ -12,11 +12,24 @@ public class Movie {
 	}
 	
 	public double getCharge(int daysRented) {
-		return price.getCharge(daysRented);
+		if(this.price instanceof RegularPrice) {
+			return price.getChargeRegular(daysRented);
+		}
+		else if(this.price instanceof NewReleasePrice) {
+			return price.getChargeNewReleases(daysRented);
+		}
+		else {
+			return price.getChargeChildren(daysRented);
+		}
 	}
 	
 	public int getFrequentRenterPoints(int daysRented) {
-		return price.getFrequentRenterPoints(daysRented);
+		if(this.price instanceof NewReleasePrice) {
+			return price.getFrequentRenterPointsNewReleases(daysRented);
+		}
+		else {
+			return price.getFrequentRenterPoints(daysRented);
+		}
 	}
 	
 	public void setPrice(Price price) {

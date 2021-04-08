@@ -6,7 +6,7 @@ public class RegularPrice extends Price {
 	public double getCharge(int daysRented) {
 		double result = Price.CHARGE_REGULAR;
 		if (daysRented > Price.DAYS_RENTED_THRESHOLD_REGULAR) {
-			result += (daysRented - Price.DAYS_RENTED_THRESHOLD_REGULAR) * Price.EXTRA_CHARGE;
+			result += (daysRented - Price.DAYS_RENTED_THRESHOLD_REGULAR) * Price.EXTRA_CHARGE_REGULAR;
 		}
 		return result;
 	}

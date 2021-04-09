@@ -7,7 +7,7 @@ public class ChildrenMovie extends Movie {
 	private static final int DAYS_RENTED_THRESHOLD = 3;
 
     public ChildrenMovie(String title) {
-        super(title, MovieType.CHILDREN);
+        super(title);
     }
 
     public double getCharge(int daysRented) {

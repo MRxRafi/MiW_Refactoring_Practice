@@ -5,11 +5,9 @@ public abstract class Movie {
 	protected static final int FREQUENT_RENTER_POINTS = 1;
 
 	protected String title;
-	protected MovieType movieType;
 	
-	public Movie(String title, MovieType movieType) {
+	public Movie(String title) {
 		this.title = title;
-		this.movieType = movieType;
 	}
 	
 	public abstract double getCharge(int daysRented);

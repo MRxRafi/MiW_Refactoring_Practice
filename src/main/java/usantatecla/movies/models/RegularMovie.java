@@ -7,7 +7,7 @@ public class RegularMovie extends Movie {
 	private static final int DAYS_RENTED_THRESHOLD = 2;
 
     public RegularMovie(String title) {
-        super(title, MovieType.REGULAR);
+        super(title);
     }
 
     public double getCharge(int daysRented) {

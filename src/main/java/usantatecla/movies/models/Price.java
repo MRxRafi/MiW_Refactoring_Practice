@@ -1,10 +1,6 @@
 package usantatecla.movies.models;
 
 public class Price {
-	
-	public double getCharge(int daysRented) {
-		return 0;
-	}
 
 	public double getChargeRegular(int daysRented) {
 		double result = Movie.CHARGE_REGULAR;

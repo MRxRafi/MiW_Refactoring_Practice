@@ -12,4 +12,17 @@ public class NewReleaseMovie extends Movie {
 		return NewReleaseMovie.CHARGE;
 	}
 
+    @Override
+    public int getFrequentRenterPoints(int daysRented) {
+		return this.getFrequentRenterPointsNewReleases(daysRented);
+	}
+
+    private int getFrequentRenterPointsNewReleases(int daysRented) {
+		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_NEW_RELEASE) {
+			return Movie.FREQUENT_RENTER_POINTS_NEW_RELEASE;
+		} else {
+			return Movie.FREQUENT_RENTER_POINTS;
+		}
+	}
+
 }

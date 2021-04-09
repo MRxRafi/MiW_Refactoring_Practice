@@ -1,15 +1,19 @@
 package usantatecla.movies.models;
 
 public class ChildrenMovie extends Movie {
-    
+
+	private static final double CHARGE = 1.5;
+	private static final double EXTRA_CHARGE = 1.5;
+	private static final int DAYS_RENTED_THRESHOLD = 3;
+
     public ChildrenMovie(String title) {
         super(title, MovieType.CHILDREN);
     }
 
     public double getCharge(int daysRented) {
-		double result = Movie.CHARGE_CHILDREN;
-		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_CHILDREN) {
-			result += (daysRented - 1) * Movie.EXTRA_CHARGE_CHILDREN;
+		double result = ChildrenMovie.CHARGE;
+		if (daysRented > ChildrenMovie.DAYS_RENTED_THRESHOLD) {
+			result += (daysRented - 1) * ChildrenMovie.EXTRA_CHARGE;
 		}
 		return result;
 	}

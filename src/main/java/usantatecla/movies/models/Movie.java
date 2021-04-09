@@ -17,24 +17,22 @@ public class Movie {
 	static final int FREQUENT_RENTER_POINTS = 1;
 
 	private String title;
-	private Price price;
 	private MovieType movieType;
 	
-	public Movie(String title, Price price, MovieType movieType) {
+	public Movie(String title, MovieType movieType) {
 		this.title = title;
-		this.price = price;
 		this.movieType = movieType;
 	}
 	
 	public double getCharge(int daysRented) {
 		if(this.movieType == MovieType.REGULAR) {
-			return price.getChargeRegular(daysRented);
+			return this.getChargeRegular(daysRented);
 		}
 		else if(this.movieType == MovieType.NEW_RELEASE) {
-			return price.getChargeNewReleases(daysRented);
+			return this.getChargeNewReleases(daysRented);
 		}
 		else {
-			return price.getChargeChildren(daysRented);
+			return this.getChargeChildren(daysRented);
 		}
 	}
 
@@ -60,10 +58,10 @@ public class Movie {
 	
 	public int getFrequentRenterPoints(int daysRented) {
 		if(this.movieType == MovieType.NEW_RELEASE) {
-			return price.getFrequentRenterPointsNewReleases(daysRented);
+			return this.getFrequentRenterPointsNewReleases(daysRented);
 		}
 		else {
-			return price.getFrequentRenterPoints(daysRented);
+			return this.getFrequentRenterPointsDefault(daysRented);
 		}
 	}
 
@@ -77,10 +75,6 @@ public class Movie {
 
 	public int getFrequentRenterPointsDefault(int daysRented) {
 		return Movie.FREQUENT_RENTER_POINTS;
-	}
-	
-	public void setPrice(Price price) {
-		this.price = price;
 	}
 	
 	public String getTitle() {

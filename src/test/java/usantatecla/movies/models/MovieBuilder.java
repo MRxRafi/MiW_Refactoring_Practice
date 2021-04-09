@@ -30,6 +30,6 @@ public class MovieBuilder {
 	}
 	
 	public Movie build() {
-		return new Movie(this.title, new Price(), this.movieType);
+		return new Movie(this.title, this.movieType);
 	}
 }

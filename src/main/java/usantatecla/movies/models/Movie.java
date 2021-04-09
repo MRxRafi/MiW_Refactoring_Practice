@@ -1,6 +1,6 @@
 package usantatecla.movies.models;
 
-public class Movie {
+public abstract class Movie {
 
 	protected static final double CHARGE_REGULAR = 2.0;
 	protected static final double EXTRA_CHARGE_REGULAR = 1.5;
@@ -24,17 +24,7 @@ public class Movie {
 		this.movieType = movieType;
 	}
 	
-	public double getCharge(int daysRented) {
-		if(this.movieType == MovieType.REGULAR) {
-			return this.getChargeRegular(daysRented);
-		}
-		else if(this.movieType == MovieType.NEW_RELEASE) {
-			return this.getChargeNewReleases(daysRented);
-		}
-		else {
-			return this.getChargeChildren(daysRented);
-		}
-	}
+	public abstract double getCharge(int daysRented);
 
 	public double getChargeRegular(int daysRented) {
 		double result = Movie.CHARGE_REGULAR;

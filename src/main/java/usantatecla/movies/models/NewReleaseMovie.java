@@ -3,6 +3,8 @@ package usantatecla.movies.models;
 public class NewReleaseMovie extends Movie {
 
 	private static final double CHARGE = 3;
+    private static final int DAYS_RENTED_THRESHOLD = 1;
+	private static final int FREQUENT_RENTER_POINTS = 2;
 
     public NewReleaseMovie(String title) {
         super(title, MovieType.NEW_RELEASE);
@@ -14,8 +16,8 @@ public class NewReleaseMovie extends Movie {
 
     @Override
     public int getFrequentRenterPoints(int daysRented) {
-		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_NEW_RELEASE) {
-			return Movie.FREQUENT_RENTER_POINTS_NEW_RELEASE;
+		if (daysRented > NewReleaseMovie.DAYS_RENTED_THRESHOLD) {
+			return NewReleaseMovie.FREQUENT_RENTER_POINTS;
 		} else {
 			return Movie.FREQUENT_RENTER_POINTS;
 		}

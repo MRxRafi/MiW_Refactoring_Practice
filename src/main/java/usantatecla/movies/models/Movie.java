@@ -2,10 +2,7 @@ package usantatecla.movies.models;
 
 public abstract class Movie {
 
-	protected static final int DAYS_RENTED_THRESHOLD_NEW_RELEASE = 1;
-	protected static final int FREQUENT_RENTER_POINTS_NEW_RELEASE = 2;
-
-	static final int FREQUENT_RENTER_POINTS = 1;
+	protected static final int FREQUENT_RENTER_POINTS = 1;
 
 	protected String title;
 	protected MovieType movieType;

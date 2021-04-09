@@ -25,26 +25,6 @@ public abstract class Movie {
 	}
 	
 	public abstract double getCharge(int daysRented);
-
-	public double getChargeRegular(int daysRented) {
-		double result = Movie.CHARGE_REGULAR;
-		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_REGULAR) {
-			result += (daysRented - Movie.DAYS_RENTED_THRESHOLD_REGULAR) * Movie.EXTRA_CHARGE_REGULAR;
-		}
-		return result;
-	}
-
-	public double getChargeNewReleases(int daysRented) {
-		return Movie.CHARGE_NEW_RELEASE;
-	}
-
-	public double getChargeChildren(int daysRented) {
-		double result = Movie.CHARGE_CHILDREN;
-		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_CHILDREN) {
-			result += (daysRented - 1) * Movie.EXTRA_CHARGE_CHILDREN;
-		}
-		return result;
-	}
 	
 	public int getFrequentRenterPoints(int daysRented) {
 		if(this.movieType == MovieType.NEW_RELEASE) {

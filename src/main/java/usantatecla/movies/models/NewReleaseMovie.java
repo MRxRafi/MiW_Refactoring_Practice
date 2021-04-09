@@ -10,4 +10,8 @@ public class NewReleaseMovie extends Movie {
 		return this.getChargeNewReleases(daysRented);
 	}
 
+    private double getChargeNewReleases(int daysRented) {
+		return Movie.CHARGE_NEW_RELEASE;
+	}
+
 }

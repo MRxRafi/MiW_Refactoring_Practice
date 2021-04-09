@@ -21,34 +21,34 @@ public class Price {
 	}
 
 	public double getChargeRegular(int daysRented) {
-		double result = Price.CHARGE_REGULAR;
-		if (daysRented > Price.DAYS_RENTED_THRESHOLD_REGULAR) {
-			result += (daysRented - Price.DAYS_RENTED_THRESHOLD_REGULAR) * Price.EXTRA_CHARGE_REGULAR;
+		double result = Movie.CHARGE_REGULAR;
+		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_REGULAR) {
+			result += (daysRented - Movie.DAYS_RENTED_THRESHOLD_REGULAR) * Movie.EXTRA_CHARGE_REGULAR;
 		}
 		return result;
 	}
 
 	public double getChargeNewReleases(int daysRented) {
-		return Price.CHARGE_NEW_RELEASE;
+		return Movie.CHARGE_NEW_RELEASE;
 	}
 	
 	public int getFrequentRenterPointsNewReleases(int daysRented) {
-		if (daysRented > Price.DAYS_RENTED_THRESHOLD_NEW_RELEASE) {
-			return Price.FREQUENT_RENTER_POINTS_NEW_RELEASE;
+		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_NEW_RELEASE) {
+			return Movie.FREQUENT_RENTER_POINTS_NEW_RELEASE;
 		} else {
 			return this.getFrequentRenterPoints(daysRented);
 		}
 	}
 
 	public double getChargeChildren(int daysRented) {
-		double result = Price.CHARGE_CHILDREN;
-		if (daysRented > Price.DAYS_RENTED_THRESHOLD_CHILDREN) {
-			result += (daysRented - 1) * Price.EXTRA_CHARGE_CHILDREN;
+		double result = Movie.CHARGE_CHILDREN;
+		if (daysRented > Movie.DAYS_RENTED_THRESHOLD_CHILDREN) {
+			result += (daysRented - 1) * Movie.EXTRA_CHARGE_CHILDREN;
 		}
 		return result;
 	}
 	
 	public int getFrequentRenterPoints(int daysRented) {
-		return Price.FREQUENT_RENTER_POINTS;
+		return Movie.FREQUENT_RENTER_POINTS;
 	}
 }

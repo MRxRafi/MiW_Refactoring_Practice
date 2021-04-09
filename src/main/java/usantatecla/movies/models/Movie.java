@@ -14,7 +14,7 @@ public class Movie {
 	protected static final double EXTRA_CHARGE_CHILDREN = 1.5;
 	protected static final int DAYS_RENTED_THRESHOLD_CHILDREN = 3;
 
-	private static final int FREQUENT_RENTER_POINTS = 1;
+	static final int FREQUENT_RENTER_POINTS = 1;
 
 	private String title;
 	private Price price;

@@ -16,8 +16,8 @@ public class Movie {
 
 	static final int FREQUENT_RENTER_POINTS = 1;
 
-	private String title;
-	private MovieType movieType;
+	protected String title;
+	protected MovieType movieType;
 	
 	public Movie(String title, MovieType movieType) {
 		this.title = title;

@@ -72,10 +72,6 @@ public class Movie {
 			return Movie.FREQUENT_RENTER_POINTS;
 		}
 	}
-
-	public int getFrequentRenterPointsDefault(int daysRented) {
-		return Movie.FREQUENT_RENTER_POINTS;
-	}
 	
 	public String getTitle() {
 		return title;

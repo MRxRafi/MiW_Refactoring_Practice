@@ -6,14 +6,23 @@ import org.junit.Test;
 
 public class CustomerTest {
 
+	private static String CUSTOMER_NAME = "customerName";
+
+	private CustomerBuilder getCustomerBuilder() {
+		return new CustomerBuilder().name(CustomerTest.CUSTOMER_NAME);
+	}
+
+	private StatementBuilder getStatementBuilder() {
+		return new StatementBuilder().customerName(CustomerTest.CUSTOMER_NAME);
+	}
+
 	@Test
 	public void withoutRentalsTest() {
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).build();
+		Customer customer = this.getCustomerBuilder().build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName)
+		String result = this.getStatementBuilder()
 				.totalAmount(0).frequentRenterPoints(0).build();
 		assertEquals(result, statement);
 	}
@@ -23,12 +32,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).regular().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 2)
+		String result = this.getStatementBuilder().movie(movieName, 2)
 				.totalAmount(2).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -38,12 +46,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).regular().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(2).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 2)
+		String result = this.getStatementBuilder().movie(movieName, 2)
 				.totalAmount(2).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -53,12 +60,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).regular().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 3.5)
+		String result = this.getStatementBuilder().movie(movieName, 3.5)
 				.totalAmount(3.5).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -68,12 +74,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 3)
+		String result = this.getStatementBuilder().movie(movieName, 3)
 				.totalAmount(3).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -83,12 +88,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(2).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 3)
+		String result = this.getStatementBuilder().movie(movieName, 3)
 				.totalAmount(3).frequentRenterPoints(2).build();
 		assertEquals(result, statement);
 	}
@@ -98,12 +102,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 3)
+		String result = this.getStatementBuilder().movie(movieName, 3)
 				.totalAmount(3).frequentRenterPoints(2).build();
 		assertEquals(result, statement);
 	}
@@ -113,12 +116,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).childrens().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 1.5)
+		String result = this.getStatementBuilder().movie(movieName, 1.5)
 				.totalAmount(1.5).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -128,12 +130,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).childrens().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 1.5)
+		String result = this.getStatementBuilder().movie(movieName, 1.5)
 				.totalAmount(1.5).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -143,12 +144,11 @@ public class CustomerTest {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).childrens().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(4).build();
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName).rental(rental).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName).movie(movieName, 6)
+		String result = this.getStatementBuilder().movie(movieName, 6)
 				.totalAmount(6).frequentRenterPoints(1).build();
 		assertEquals(result, statement);
 	}
@@ -167,13 +167,12 @@ public class CustomerTest {
 		Movie childrensMovie = new MovieBuilder().title(childrensMovieName).childrens().build();
 		Rental childrensRental = new RentalBuilder().movie(childrensMovie).daysRented(10).build();
 		
-		String customerName = "customerName";
-		Customer customer = new CustomerBuilder().name(customerName)
+		Customer customer = this.getCustomerBuilder()
 				.rental(regularRental).rental(newReleaseRental).rental(childrensRental).build();
 
 		String statement = customer.statement();
 
-		String result = new StatementBuilder().customerName(customerName)
+		String result = this.getStatementBuilder()
 				.movie(regularMovieName, 14).movie(newReleaseMovieName, 3).movie(childrensMovieName, 15)
 				.totalAmount(32).frequentRenterPoints(4).build();
 		assertEquals(result, statement);

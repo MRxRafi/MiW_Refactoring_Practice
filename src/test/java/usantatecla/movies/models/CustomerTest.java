@@ -1,6 +1,7 @@
 package usantatecla.movies.models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -17,18 +18,16 @@ public class CustomerTest {
 	}
 
 	@Test
-	public void withoutRentalsTest() {
+	public void givenCustomerWhenStatementThenCorrectCustomerName() {
 		Customer customer = this.getCustomerBuilder().build();
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder()
-				.totalAmount(0).frequentRenterPoints(0).build();
-		assertEquals(result, statement);
+		assertEquals(new StatementDeserializer(statement).getCustomerName(), customer.getName());
 	}
 
 	@Test
-	public void regularRental1DayTest() {
+	public void givenCustomerWhenStatementThenCorrectMovieName() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).regular().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
@@ -36,13 +35,53 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 2)
-				.totalAmount(2).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertEquals(new StatementDeserializer(statement).getMovieNames().get(0), movieName);
 	}
-	
+
 	@Test
-	public void regularRental2DayTest() {
+	public void givenCustomerWithoutRentalsWhenStatementThenCorrectTotalAmount() {
+		Customer customer = this.getCustomerBuilder().build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 0);
+	}
+
+	@Test
+	public void givenCustomerWithoutRentalsWhenStatementThenCorrectFrequentRenterPoints() {
+		Customer customer = this.getCustomerBuilder().build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 0);
+	}
+
+	@Test
+	public void givenCustomerWith1DayRentalWhenStatementThenCorrectTotalAmount() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).regular().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 2);
+	}
+
+	@Test
+	public void givenCustomerWith1DayRentalWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).regular().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
+	}
+
+	@Test
+	public void givenCustomerWith2DayRentalWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).regular().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(2).build();
@@ -50,13 +89,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 2)
-				.totalAmount(2).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 2);
 	}
 
 	@Test
-	public void regularRental3DayTest() {
+	public void givenCustomerWith2DayRentalWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).regular().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(2).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
+	}
+
+	@Test
+	public void givenCustomerWith3DayRentalWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).regular().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
@@ -64,13 +113,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 3.5)
-				.totalAmount(3.5).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 3.5);
 	}
-	
+
 	@Test
-	public void newReleaseRental1DayTest() {
+	public void givenCustomerWith3DayRentalWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).regular().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
+	}
+
+	@Test
+	public void givenCustomerWithNewReleaseMovie1RentalDayWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
@@ -78,13 +137,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 3)
-				.totalAmount(3).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 3);
 	}
-	
+
 	@Test
-	public void newReleaseRental2DayTest() {
+	public void givenCustomerWithNewReleaseMovie1RentalDayWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
+	}
+
+	@Test
+	public void givenCustomerWithNewReleaseMovie2RentalDayWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(2).build();
@@ -92,13 +161,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 3)
-				.totalAmount(3).frequentRenterPoints(2).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 3);
 	}
-	
+
 	@Test
-	public void newReleaseRental3DayTest() {
+	public void givenCustomerWithNewReleaseMovie2RentalDayWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(2).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 2);
+	}
+
+	@Test
+	public void givenCustomerWithNewReleaseMovie3RentalDayWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
@@ -106,13 +185,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 3)
-				.totalAmount(3).frequentRenterPoints(2).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 3);
+	}
+
+	@Test
+	public void givenCustomerWithNewReleaseMovie3RentalDayWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).newRelease().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 2);
 	}
 	
 	@Test
-	public void childrensRental1DayTest() {
+	public void givenCustomerWithChildrenMovie1RentalDayWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).childrens().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
@@ -120,13 +209,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 1.5)
-				.totalAmount(1.5).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 1.5);
 	}
-	
+
 	@Test
-	public void childrensRental3DayTest() {
+	public void givenCustomerWithChildrenMovie1RentalDayWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).childrens().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(1).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
+	}
+
+	@Test
+	public void givenCustomerWithChildrenMovie3RentalDayWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).childrens().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
@@ -134,13 +233,23 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 1.5)
-				.totalAmount(1.5).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 1.5);
 	}
-	
+
 	@Test
-	public void childrensRental4DayTest() {
+	public void givenCustomerWithChildrenMovie3RentalDayWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).childrens().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(3).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
+	}
+
+	@Test
+	public void givenCustomerWithChildrenMovie4RentalDayWhenStatementThenCorrectTotalAmount() {
 		String movieName = "movieName";
 		Movie movie = new MovieBuilder().title(movieName).childrens().build();
 		Rental rental = new RentalBuilder().movie(movie).daysRented(4).build();
@@ -148,9 +257,19 @@ public class CustomerTest {
 
 		String statement = customer.statement();
 
-		String result = this.getStatementBuilder().movie(movieName, 6)
-				.totalAmount(6).frequentRenterPoints(1).build();
-		assertEquals(result, statement);
+		assertTrue(new StatementDeserializer(statement).getTotalCharge() == 6);
+	}
+
+	@Test
+	public void givenCustomerWithChildrenMovie4RentalDayWhenStatementThenCorrectFrequentRenterPoints() {
+		String movieName = "movieName";
+		Movie movie = new MovieBuilder().title(movieName).childrens().build();
+		Rental rental = new RentalBuilder().movie(movie).daysRented(4).build();
+		Customer customer = this.getCustomerBuilder().rental(rental).build();
+
+		String statement = customer.statement();
+
+		assertTrue(new StatementDeserializer(statement).getFrequentRenterPoints() == 1);
 	}
 	
 	@Test
